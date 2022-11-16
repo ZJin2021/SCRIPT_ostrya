@@ -1,0 +1,56 @@
+// Priors and rules file
+// *********************
+
+[PARAMETERS]
+//#isInt? #name   #dist.#min  #max
+//all N are in number of haploid individuals
+1  ANCSIZE     unif     1000  1e6   output
+1  NPOP0       unif     1000  1e6   output
+1  NPOP1       unif     1000  1e6   output
+1  NP1AFH1      unif     1000  1e6   output
+1  NP0AFH2      unif     1000  1e6   output
+1  NP1AFH3      unif     1000  1e6   output
+1  NP0AFH4      unif     1000  1e6   output
+0  MN0M01   logunif  1e-2 20       output
+0  MN0M10   logunif  1e-2 20       output
+0  MN1M01   logunif  1e-2 20       output
+0  MN1M10   logunif  1e-2 20       output
+0  MN2M01   logunif  1e-2 20       output
+0  MN2M10   logunif  1e-2 20       output
+0  MN3M01   logunif  1e-2 20       output
+0  MN3M10   logunif  1e-2 20       output
+0  MN4M01   logunif  1e-2 20       output
+0  MN4M10   logunif  1e-2 20       output
+1  TH1$    unif     1e3  2e5   output
+1  TH12    unif     1e3  2e5   output
+1  TH23    unif     1e3  2e5   output
+1  TH34    unif     1e3  2e5   output
+1  TH45    unif     1e3  2e5   output
+[RULES]
+
+[COMPLEX PARAMETERS]
+0  RS1R11 = NP1AFH1/NPOP1  output
+0  RS2R00 = NP0AFH2/NPOP0  output
+0  RS3R11 = NP1AFH3/NP1AFH1  output
+0  RS4R00 = NP0AFH4/NP0AFH2  output
+0  RS5R01 = ANCSIZE/NP1AFH3  output
+
+0  MR0M01 = MN0M01/NPOP0  output
+0  MR0M10 = MN0M10/NPOP1  output
+
+0  MR1M01 = MN1M01/NPOP0  output
+0  MR1M10 = MN1M10/NP1AFH1  output
+
+0  MR2M01 = MN2M01/NP0AFH2  output
+0  MR2M10 = MN2M10/NP1AFH1  output
+
+0  MR3M01 = MN3M01/NP0AFH2  output
+0  MR3M10 = MN3M10/NP1AFH3  output
+
+0  MR4M01 = MN4M01/NP0AFH4  output
+0  MR4M10 = MN4M10/NP1AFH3  output
+
+1  TH2$ = TH1$ + TH12  output
+1  TH3$ = TH2$ + TH23  output
+1  TH4$ = TH3$ + TH34  output
+1  TH5$ = TH4$ + TH45  output
